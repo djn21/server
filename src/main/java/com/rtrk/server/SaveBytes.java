@@ -5,9 +5,16 @@ import java.io.FileOutputStream;
 
 public class SaveBytes extends Thread {
 	
-	private static final String filePath=".\\requests";
-	private static final String header = "MESSAGE[";
-	private static final String footer = "]ENDOFMESSAGE\n";
+	private String filePath;
+	private String header;
+	private String footer;
+	
+	public SaveBytes(String filePath, String header, String footer) {
+		super();
+		this.filePath = filePath;
+		this.header = header;
+		this.footer = footer;
+	}
 
 	public void run() {
 		FileOutputStream fout;

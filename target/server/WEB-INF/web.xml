@@ -9,9 +9,18 @@
   	<display-name>Server</display-name>
   	<description></description>
   	<servlet-class>com.rtrk.server.Server</servlet-class>
+  	<init-param>
+  		<param-name>SocketAddress</param-name>
+  		<param-value>127.0.0.1</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>SocketPort</param-name>
+  		<param-value>9090</param-value>
+  	</init-param>
   </servlet>
   <servlet-mapping>
   	<servlet-name>Server</servlet-name>
   	<url-pattern>/server</url-pattern>
   </servlet-mapping>
+  
 </web-app>

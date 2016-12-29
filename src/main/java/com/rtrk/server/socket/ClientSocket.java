@@ -11,23 +11,33 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
 public class ClientSocket extends Thread {
+	
+	private static final  int bufferSize=1024;
 
-	private static final String address = "127.0.0.1";
-	private static final int TCP_PORT = 9090;
-	private static final int bufferSize = 1024;
-	private static final String filesPath = "sending";
-	private static final String sentFilesPath = "sent";
+	private  String address;
+	private  int port;
+	private  String sendingFilesPath;
+	private  String sentFilesPath;
+	
+	public ClientSocket(String address, int port, String sendingFilesPath, String sentFilesPath) {
+		super();
+		this.address = address;
+		this.port = port;
+		this.sendingFilesPath = sendingFilesPath;
+		this.sentFilesPath = sentFilesPath;
+	}
+
 
 	public void run() {
 		try {
 			while (!com.rtrk.server.Server.end) {
 				// Read file if exists
-				File folder = new File(filesPath);
+				File folder = new File(sendingFilesPath);
 				File[] files = folder.listFiles();
 				if (files.length != 0) {
 					for (File file : files) {
 						InetAddress addr = InetAddress.getByName(address);
-						Socket socket = new Socket(addr, TCP_PORT);
+						Socket socket = new Socket(addr, port);
 						// Send bytes
 						InputStream inBytes = new FileInputStream(file);
 						DataInputStream in = new DataInputStream(socket.getInputStream());
@@ -51,9 +61,9 @@ public class ClientSocket extends Thread {
 						// Read response status
 						boolean sent = in.readBoolean();
 						if (sent) {
-							System.out.println("SOCKET: File sent.");
+							System.out.println("File sent SOCKET");
 						} else {
-							System.out.println("SOCKET: File not sent.");
+							System.out.println("File not sent SOCKET");
 						}
 						out.close();
 						in.close();

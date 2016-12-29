@@ -3,7 +3,6 @@ package com.rtrk.server;
 import java.io.IOException;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.SynchronousQueue;
-
 import javax.servlet.ServletException;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServlet;
@@ -37,6 +36,19 @@ public class Server extends HttpServlet {
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
 		super.init();
+		// Read socket config
+		String socketAddress=getInitParameter("SocketAddress");
+		int socketPort=Integer.parseInt(getInitParameter("SocketPort"));
+		String filePathSending="C:\\Users\\djekanovic\\Desktop\\sendingsocket";
+		String filePathSent="C:\\Users\\djekanovic\\Desktop\\sentsocket";
+		new ClientSocket(socketAddress, socketPort, filePathSending, filePathSent).start();
+		System.out.println("ClientSocket started");
+		// Read http config
+		String filePathHttp="C:\\Users\\djekanovic\\Desktop\\requestshttp";
+		String header="MESSAGE[";
+		String footer="]ENDOFMESSAGE\n";
+		new SaveBytes(filePathHttp, header, footer).start();	
+		System.out.println("SaveBytes started");
 	}
 
 	
@@ -55,9 +67,7 @@ public class Server extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		new SaveBytes().start();
-		new ClientSocket().start();
+		
 	}
 
 	/**
