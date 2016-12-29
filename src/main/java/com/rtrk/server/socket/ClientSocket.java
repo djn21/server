@@ -1,14 +1,10 @@
 package com.rtrk.server.socket;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.nio.file.Files;
@@ -18,7 +14,7 @@ public class ClientSocket extends Thread {
 
 	private static final String address = "127.0.0.1";
 	private static final int TCP_PORT = 9090;
-	private static final int bufferSize = 65;
+	private static final int bufferSize = 1024;
 	private static final String filesPath = "sending";
 	private static final String sentFilesPath = "sent";
 
@@ -32,18 +28,18 @@ public class ClientSocket extends Thread {
 					for (File file : files) {
 						InetAddress addr = InetAddress.getByName(address);
 						Socket socket = new Socket(addr, TCP_PORT);
-						BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-						PrintWriter out = new PrintWriter(
-								new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
-						// Send file length
-						out.println(file.length());
 						// Send bytes
 						InputStream inBytes = new FileInputStream(file);
-						OutputStream outBytes = socket.getOutputStream();
+						DataInputStream in = new DataInputStream(socket.getInputStream());
+						DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+						// Send file length
+						out.writeInt((int) file.length());
+						out.flush();
 						byte[] buffer = new byte[bufferSize];
 						int count;
 						while ((count = inBytes.read(buffer)) > 0) {
-							outBytes.write(buffer, 0, count);
+							out.write(buffer, 0, count);
+							out.flush();
 						}
 						// Copy file to sent folder
 						inBytes.close();
@@ -53,15 +49,17 @@ public class ClientSocket extends Thread {
 						inBytes.close();
 						file.delete();
 						// Read response status
-						String status = in.readLine();
-						System.out.println(status);
-						outBytes.close();
+						boolean sent = in.readBoolean();
+						if (sent) {
+							System.out.println("SOCKET: File sent.");
+						} else {
+							System.out.println("SOCKET: File not sent.");
+						}
 						out.close();
 						in.close();
 						socket.close();
 					}
 				}
-				System.out.println("NEMA");
 				sleep(500);
 			}
 		} catch (Exception e) {
