@@ -27,24 +27,22 @@ public class Server extends HttpServlet {
      */
     public Server() {
         super();
-        // TODO Auto-generated constructor stub
     }
     
     
 
 	@Override
 	public void init() throws ServletException {
-		// TODO Auto-generated method stub
 		super.init();
 		// Read socket config
 		String socketAddress=getInitParameter("SocketAddress");
 		int socketPort=Integer.parseInt(getInitParameter("SocketPort"));
-		String filePathSending="C:\\Users\\djekanovic\\Desktop\\sendingsocket";
-		String filePathSent="C:\\Users\\djekanovic\\Desktop\\sentsocket";
+		String filePathSending=getInitParameter("socketsendingpath");
+		String filePathSent=getInitParameter("socketsentpath");
 		new ClientSocket(socketAddress, socketPort, filePathSending, filePathSent).start();
 		System.out.println("ClientSocket started");
 		// Read http config
-		String filePathHttp="C:\\Users\\djekanovic\\Desktop\\requestshttp";
+		String filePathHttp=getInitParameter("httppath");
 		String header="MESSAGE[";
 		String footer="]ENDOFMESSAGE\n";
 		new SaveBytes(filePathHttp, header, footer).start();	
@@ -56,7 +54,6 @@ public class Server extends HttpServlet {
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
 		end=true;
 		super.destroy();
 	}
@@ -74,7 +71,6 @@ public class Server extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		ServletInputStream in = request.getInputStream();
 		byte[] buffer = new byte[bufferSize];
 		int size = in.read(buffer);
