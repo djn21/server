@@ -70,6 +70,7 @@ public class ClientSocket extends Thread {
 						socket.close();
 					}
 				}
+				// Sleep 0.5 seconds
 				sleep(500);
 			}
 		} catch (Exception e) {

@@ -21,13 +21,14 @@ public class SaveBytes extends Thread {
 		try {
 			fout = new FileOutputStream(new File(filePath), true);
 			while (!Server.end) {
-
 				byte[] bytes = Server.queue.take();
 				if (bytes != null) {
 					fout.write(header.getBytes());
 					fout.write(bytes);
 					fout.write(footer.getBytes());
 				}
+				// Sleep 0.5 seconds
+				sleep(500);
 			}
 			fout.close();
 		} catch (Exception e) {
