@@ -30,9 +30,19 @@
   		<param-value>C:\\Users\\djekanovic\\Desktop\\requestshttp</param-value>
   	</init-param>
   </servlet>
+  <servlet>
+  	<servlet-name>ResponseCodeServlet</servlet-name>
+  	<display-name>ResponseCodeServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.rtrk.server.ResponseCodeServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>Server</servlet-name>
   	<url-pattern>/server</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ResponseCodeServlet</servlet-name>
+  	<url-pattern>/responsecode</url-pattern>
   </servlet-mapping>
   
 </web-app>

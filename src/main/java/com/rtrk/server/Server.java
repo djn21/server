@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.rtrk.server.socket.ClientSocket;
+//import com.rtrk.server.socket.ClientSocket;
 
 /**
  * Servlet implementation class Server
@@ -35,12 +35,12 @@ public class Server extends HttpServlet {
 	public void init() throws ServletException {
 		super.init();
 		// Read socket config
-		String socketAddress=getInitParameter("SocketAddress");
+		/*String socketAddress=getInitParameter("SocketAddress");
 		int socketPort=Integer.parseInt(getInitParameter("SocketPort"));
 		String filePathSending=getInitParameter("socketsendingpath");
 		String filePathSent=getInitParameter("socketsentpath");
 		new ClientSocket(socketAddress, socketPort, filePathSending, filePathSent).start();
-		System.out.println("ClientSocket started");
+		System.out.println("ClientSocket started");*/
 		// Read http config
 		String filePathHttp=getInitParameter("httppath");
 		String header="MESSAGE[";

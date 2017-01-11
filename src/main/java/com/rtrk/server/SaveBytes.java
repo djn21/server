@@ -4,11 +4,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 public class SaveBytes extends Thread {
-	
+
 	private String filePath;
 	private String header;
 	private String footer;
-	
+
 	public SaveBytes(String filePath, String header, String footer) {
 		super();
 		this.filePath = filePath;
@@ -26,9 +26,10 @@ public class SaveBytes extends Thread {
 					fout.write(header.getBytes());
 					fout.write(bytes);
 					fout.write(footer.getBytes());
+				} else {
+					// Sleep 0.5 seconds
+					sleep(500);
 				}
-				// Sleep 0.5 seconds
-				sleep(500);
 			}
 			fout.close();
 		} catch (Exception e) {

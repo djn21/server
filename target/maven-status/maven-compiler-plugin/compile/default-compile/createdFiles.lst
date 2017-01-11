@@ -1,3 +1,4 @@
-com\rtrk\server\SaveBytes.class
 com\rtrk\server\Server.class
 com\rtrk\server\socket\ClientSocket.class
+com\rtrk\server\SaveBytes.class
+com\rtrk\server\adapter\ProtobufAdapter.class
