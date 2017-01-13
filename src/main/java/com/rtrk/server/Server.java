@@ -34,13 +34,6 @@ public class Server extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		// Read socket config
-		/*String socketAddress=getInitParameter("SocketAddress");
-		int socketPort=Integer.parseInt(getInitParameter("SocketPort"));
-		String filePathSending=getInitParameter("socketsendingpath");
-		String filePathSent=getInitParameter("socketsentpath");
-		new ClientSocket(socketAddress, socketPort, filePathSending, filePathSent).start();
-		System.out.println("ClientSocket started");*/
 		// Read http config
 		String filePathHttp=getInitParameter("httppath");
 		String header="MESSAGE[";
@@ -69,6 +62,8 @@ public class Server extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * 
+	 * Receive bytes and put them to queue
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletInputStream in = request.getInputStream();

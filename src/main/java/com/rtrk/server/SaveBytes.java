@@ -3,6 +3,13 @@ package com.rtrk.server;
 import java.io.File;
 import java.io.FileOutputStream;
 
+/**
+ * 
+ * @author djekanovic
+ *
+ *         Take bytes from queue and write it to file
+ */
+
 public class SaveBytes extends Thread {
 
 	private String filePath;
@@ -19,19 +26,19 @@ public class SaveBytes extends Thread {
 	public void run() {
 		FileOutputStream fout;
 		try {
-			fout = new FileOutputStream(new File(filePath), true);
 			while (!Server.end) {
+				fout = new FileOutputStream(new File(filePath), true);
 				byte[] bytes = Server.queue.take();
 				if (bytes != null) {
 					fout.write(header.getBytes());
 					fout.write(bytes);
 					fout.write(footer.getBytes());
+					fout.close();
 				} else {
 					// Sleep 0.5 seconds
 					sleep(500);
 				}
 			}
-			fout.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
