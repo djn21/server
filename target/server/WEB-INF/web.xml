@@ -1,0 +1,48 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+  	<servlet-name>Server</servlet-name>
+  	<display-name>Server</display-name>
+  	<description></description>
+  	<servlet-class>com.rtrk.server.Server</servlet-class>
+  	<init-param>
+  		<param-name>SocketAddress</param-name>
+  		<param-value>127.0.0.1</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>SocketPort</param-name>
+  		<param-value>9090</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>socketsendingpath</param-name>
+  		<param-value>C:\\Users\\djekanovic\\Desktop\\sendingsocket</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>socketsentpath</param-name>
+  		<param-value>C:\\Users\\djekanovic\\Desktop\\sentsocket</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>httppath</param-name>
+  		<param-value>C:\\Users\\djekanovic\\Desktop\\requestshttp</param-value>
+  	</init-param>
+  </servlet>
+  <servlet>
+  	<servlet-name>ResponseCodeServlet</servlet-name>
+  	<display-name>ResponseCodeServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.rtrk.server.ResponseCodeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Server</servlet-name>
+  	<url-pattern>/server</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ResponseCodeServlet</servlet-name>
+  	<url-pattern>/responsecode</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
