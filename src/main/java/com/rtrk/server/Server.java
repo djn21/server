@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.rtrk.server.socket.ClientSocket;
+
 //import com.rtrk.server.socket.ClientSocket;
 
 /**
@@ -38,6 +40,13 @@ public class Server extends HttpServlet {
 		// Start thread for saving bytes
 		new SaveBytes(filePathHttp).start();
 		System.out.println("SaveBytes started");
+		
+		// Start socket client
+		String address=getInitParameter("SocketAddress");
+		int port=Integer.parseInt(getInitParameter("SocketPort"));
+		String sendingFilesPath=getInitParameter("socketsendingpath");
+		String sentFilesPath=getInitParameter("socketsentpath");
+		new ClientSocket(address, port, sendingFilesPath, sentFilesPath).start();
 	}
 
 	@Override
