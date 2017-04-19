@@ -14,7 +14,9 @@ import com.rtrk.server.socket.ClientSocket;
 //import com.rtrk.server.socket.ClientSocket;
 
 /**
+ * 
  * Servlet implementation class Server
+ * 
  */
 public class Server extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -69,6 +71,7 @@ public class Server extends HttpServlet {
 	 *      response)
 	 * 
 	 *      Receive bytes and put them to queue
+	 *      
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

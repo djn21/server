@@ -27,7 +27,7 @@
   	</init-param>
   	<init-param>
   		<param-name>httppath</param-name>
-  		<param-value>C:\\Users\\djekanovic\\Desktop\\requestshttp</param-value>
+  		<param-value>C:\\Users\\djekanovic\\Desktop\\httpreq</param-value>
   	</init-param>
   </servlet>
   <servlet>

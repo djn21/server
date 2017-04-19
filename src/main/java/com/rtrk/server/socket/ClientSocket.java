@@ -10,6 +10,13 @@ import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
+/**
+ * 
+ * The class represents client side socket which sent bytes to server
+ * 
+ * @author djekanovic
+ *
+ */
 public class ClientSocket extends Thread {
 	
 	private static final  int bufferSize=1024;
